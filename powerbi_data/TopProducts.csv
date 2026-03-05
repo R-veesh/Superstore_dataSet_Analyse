@@ -1,0 +1,51 @@
+ProductID,ProductName,Category,SubCategory,TotalSales,TotalProfit,TotalQuantity,OrderCount
+TEC-CO-10004722,Canon imageCLASS 2200 Advanced Copier,Technology,Copiers,61599.824,25199.928000000004,20,5
+TEC-AC-10002049,Logitech G19 Programmable Gaming Keyboard,Technology,Accessories,27513.07200000001,8850.686399999999,120,15
+OFF-BI-10003527,Fellowes PB500 Electric Punch Plastic Comb Binding Machine with Manual Bind,Office Supplies,Binders,27453.384,7753.039,31,10
+FUR-BO-10002213,DMI Eclipse Executive Suite Bookcases,Furniture,Bookcases,25843.286,39.37280000000004,84,10
+TEC-MA-10002412,Cisco TelePresence System EX90 Videoconferencing Unit,Technology,Machines,22638.48,-1811.0784,6,1
+TEC-AC-10003832,Imation 16GB Mini TravelDrive USB 2.0 Flash Drive,Technology,Accessories,22407.512000000002,3975.8505999999998,150,18
+FUR-CH-10002024,HON 5400 Series Task Chairs for Big and Tall,Furniture,Chairs,21870.576,5.684341886080802e-14,39,8
+OFF-BI-10001359,GBC DocuBind TL300 Electric Binding System,Office Supplies,Binders,19823.479000000003,2233.5051000000003,37,11
+OFF-BI-10000545,GBC Ibimaster 500 Manual ProClick Binding System,Office Supplies,Binders,19024.5,760.9799999999996,48,9
+TEC-CO-10001449,Hewlett Packard LaserJet 3310 Copier,Technology,Copiers,18839.686,6983.8836,38,8
+TEC-MA-10001127,"HP Designjet T520 Inkjet Large Format Printer - 24"" Color",Technology,Machines,18374.895,4094.9766,12,3
+OFF-BI-10004995,GBC DocuBind P400 Electric Binding System,Office Supplies,Binders,17965.068,-1878.1662000000003,27,6
+OFF-SU-10000151,High Speed Automatic Electric Letter Opener,Office Supplies,Supplies,17030.311999999998,-262.00480000000005,11,3
+TEC-MA-10000822,Lexmark MX611dhe Monochrome Laser Printer,Technology,Machines,16829.901,-4589.973,18,4
+OFF-SU-10002881,Martin Yale Chadless Opener Electric Letter Opener,Office Supplies,Supplies,16656.199999999997,-1299.1836,22,6
+TEC-PH-10001530,Cisco Unified IP Phone 7945G VoIP phone,Technology,Phones,16222.272,550.6572,68,9
+OFF-BI-10001120,Ibico EPK-21 Electric Binding System,Office Supplies,Binders,15875.916000000001,3345.2823,13,3
+FUR-BO-10004834,"Riverside Palais Royal Lawyers Bookcase, Royale Cherry Finish",Furniture,Bookcases,15610.9656,-669.5448000000004,24,5
+TEC-PH-10002200,Aastra 6757i CT Wireless VoIP phone,Technology,Phones,14875.771999999997,707.5768,60,8
+TEC-MA-10001047,"3D Systems Cube Printer, 2nd Generation, Magenta",Technology,Machines,14299.89,3717.9714000000004,11,2
+TEC-PH-10001459,Samsung Galaxy Mega 6.3,Technology,Phones,13943.668000000001,1822.7566000000002,39,6
+TEC-PH-10001795,ClearOne CHATAttach 160 - speaker phone,Technology,Phones,13871.724,2112.7653999999998,32,5
+TEC-PH-10002885,Apple iPhone 5,Technology,Phones,12996.600000000002,1611.5784,24,6
+FUR-TA-10003473,Bretford Rectangular Conference Table Tops,Furniture,Tables,12995.291500000001,-327.2331,46,12
+FUR-CH-10001215,Global Troy Executive Leather Low-Back Tilter,Furniture,Chairs,12975.382,951.862,32,9
+TEC-CO-10003763,Canon PC1060 Personal Laser Copier,Technology,Copiers,11619.833999999999,4570.9347,19,4
+FUR-CH-10004287,SAFCO Arco Folding Chair,Furniture,Chairs,11572.78,1179.3740000000003,53,13
+OFF-AP-10002945,Honeywell Enviracaire Portable HEPA Air Cleaner for 17' x 22' Room,Office Supplies,Appliances,11304.439999999999,3247.0199999999995,40,8
+TEC-MA-10000418,Cubify CubeX 3D Printer Double Head Print,Technology,Machines,11099.963,-8879.9704,9,3
+OFF-BI-10004632,GBC Binding covers,Office Supplies,Binders,11071.185999999998,-492.1350000000002,90,14
+OFF-ST-10000078,Tennsco 6- and 18-Compartment Lockers,Office Supplies,Storage,10925.004,1575.1097999999997,43,11
+TEC-AC-10003033,Plantronics CS510 - Over-the-Head monaural Wireless Headset System,Technology,Accessories,10822.359999999999,3085.0325,35,10
+FUR-CH-10000454,"Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back",Furniture,Chairs,10637.527999999998,1927.442,51,12
+TEC-MA-10001148,Okidata MB491 Multifunction Printer,Technology,Machines,10408.482000000002,-1764.2376000000002,44,5
+FUR-TA-10000198,Chromcraft Bull-Nose Wood Oval Conference Tables & Bases,Furniture,Tables,9917.64,-2876.1156,27,5
+OFF-ST-10003716,Tennsco Double-Tier Lockers,Office Supplies,Storage,9630.856,429.7882,47,12
+FUR-TA-10001889,Bush Advantage Collection Racetrack Conference Table,Furniture,Tables,9544.725,-1934.3975999999998,33,7
+TEC-MA-10000488,Bady BDG101FRU Card Printer,Technology,Machines,9279.884,1327.9834,14,4
+OFF-ST-10004459,Tennsco Single-Tier Lockers,Office Supplies,Storage,9158.296,-825.7479999999999,28,8
+FUR-CH-10003973,GuestStacker Chair with Chrome Finish Legs,Furniture,Chairs,9070.944000000001,773.2607999999999,31,8
+TEC-CO-10001046,Canon Imageclass D680 Copier / Fax,Technology,Copiers,8959.872000000001,2799.96,16,5
+TEC-CO-10002095,Hewlett Packard 610 Color Digital Copier / Printer,Technology,Copiers,8899.822,3124.9375000000005,21,7
+TEC-PH-10001817,Wilson Electronics DB Pro Signal Booster,Technology,Phones,8878.4,515.52,32,10
+FUR-CH-10001854,Office Star - Professional Matrix Back Chair with 2-to-1 Synchro Tilt and Mesh Fabric Seat,Furniture,Chairs,8774.5,1305.6455999999998,28,8
+FUR-CH-10004063,Global Deluxe High-Back Manager's Chair,Furniture,Chairs,8665.194,1558.591,35,8
+FUR-CH-10004086,Hon 4070 Series Pagoda Armless Upholstered Stacking Chairs,Furniture,Chairs,8430.997000000001,1388.6347999999998,34,8
+FUR-TA-10001095,Chromcraft Round Conference Tables,Furniture,Tables,8209.059,-189.97610000000006,61,13
+OFF-ST-10001490,"Hot File 7-Pocket, Floor Stand",Office Supplies,Storage,8138.232,2016.7110000000002,49,13
+OFF-BI-10003925,Fellowes PB300 Plastic Comb Binding Machine,Office Supplies,Binders,8070.192,2518.0551,27,6
+TEC-MA-10004125,Cubify CubeX 3D Printer Triple Head Print,Technology,Machines,7999.98,-3839.9904,4,1

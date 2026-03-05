@@ -1,0 +1,24 @@
+Category,SubCategory,Discount,DiscountTier,OrderCount,TotalSales,TotalProfit
+Furniture,Bookcases,0.0,No Discount,739,261544.50000000015,59667.24920000008
+Furniture,Chairs,0.1,Low Discount,71,47017.854,7174.946399999998
+Furniture,Bookcases,0.15,Medium Discount,51,32110.01650000001,1540.1326999999999
+Furniture,Tables,0.2,Medium Discount,539,227530.12800000046,6486.1825000000035
+Furniture,Chairs,0.3,High Discount,207,100074.69499999989,-10774.107399999999
+Furniture,Bookcases,0.32,High Discount,27,14493.458799999999,-2391.1377000000007
+Furniture,Tables,0.4,High Discount,72,45614.406,-16187.396800000002
+Furniture,Tables,0.45,High Discount,10,5484.974,-2493.1111
+Furniture,Bookcases,0.5,High Discount,53,20983.469999999998,-12871.198999999999
+Furniture,Furnishings,0.6,High Discount,127,6971.768000000005,-6157.730200000002
+Furniture,Bookcases,0.7,High Discount,15,2459.382,-3894.9393999999998
+Office Supplies,Labels,0.0,No Discount,2020,450430.8400000018,134069.2910999997
+Office Supplies,Appliances,0.1,Low Discount,16,4324.149,1086.0808
+Office Supplies,Storage,0.2,Medium Discount,1661,240973.92800000042,40275.12099999999
+Office Supplies,Binders,0.7,High Discount,323,23011.514999999992,-16965.50690000001
+Office Supplies,Appliances,0.8,High Discount,250,18008.16199999999,-32351.64009999999
+Technology,Accessories,0.0,No Discount,718,416146.5699999991,139578.59850000005
+Technology,Machines,0.1,Low Discount,2,3410.955,832.0843
+Technology,Phones,0.2,Medium Discount,744,340034.6079999999,49172.03290000001
+Technology,Machines,0.3,High Discount,5,3756.3050000000003,326.0395
+Technology,Phones,0.4,High Discount,118,75219.19199999998,-7770.8168
+Technology,Machines,0.5,High Discount,11,37935.06999999999,-7635.2291
+Technology,Machines,0.7,High Discount,22,17130.582000000002,-21087.0075

@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <name>Superstore Data Warehouse ETL</name>
+    <description>Apache NiFi flow for extracting data from multiple sources, transforming and loading into data warehouse</description>
+    
+    <flowController>
+        <id>flowController</id>
+    </flowController>
+    
+    <!-- ==================== EXTRACT PHASE ==================== -->
+    
+    <!-- GetCustomerData - Fetch Customer CSV -->
+    <processor>
+        <id>GetCustomerData</id>
+        <type>org.apache.nifi.processors.standard.GetFile</type>
+        <name>GetCustomerData</name>
+        <properties>
+            <property>
+                <name>Input Directory</name>
+                <value>D:/DW/cw</value>
+            </property>
+            <property>
+                <name>File Filter</name>
+                <value>customers\.csv</value>
+            </property>
+            <property>
+                <name>Recurse</name>
+                <value>false</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- GetProductData - Fetch Product CSV -->
+    <processor>
+        <id>GetProductData</id>
+        <type>org.apache.nifi.processors.standard.GetFile</type>
+        <name>GetProductData</name>
+        <properties>
+            <property>
+                <name>Input Directory</name>
+                <value>D:/DW/cw</value>
+            </property>
+            <property>
+                <name>File Filter</name>
+                <value>products\.csv</value>
+            </property>
+            <property>
+                <name>Recurse</name>
+                <value>false</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- GetSalesData - Fetch Sales CSV -->
+    <processor>
+        <id>GetSalesData</id>
+        <type>org.apache.nifi.processors.standard.GetFile</type>
+        <name>GetSalesData</name>
+        <properties>
+            <property>
+                <name>Input Directory</name>
+                <value>D:/DW/cw</value>
+            </property>
+            <property>
+                <name>File Filter</name>
+                <value>sales\.csv</value>
+            </property>
+            <property>
+                <name>Recurse</name>
+                <value>false</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- GetDimDate - Fetch Date Dimension CSV -->
+    <processor>
+        <id>GetDimDate</id>
+        <type>org.apache.nifi.processors.standard.GetFile</type>
+        <name>GetDimDate</name>
+        <properties>
+            <property>
+                <name>Input Directory</name>
+                <value>D:/DW/cw</value>
+            </property>
+            <property>
+                <name>File Filter</name>
+                <value>DimDate\.csv</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- GetDimStore - Fetch Store Dimension CSV -->
+    <processor>
+        <id>GetDimStore</id>
+        <type>org.apache.nifi.processors.standard.GetFile</type>
+        <name>GetDimStore</name>
+        <properties>
+            <property>
+                <name>Input Directory</name>
+                <value>D:/DW/cw</value>
+            </property>
+            <property>
+                <name>File Filter</name>
+                <value>DimStore\.csv</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- GetDimShipMode - Fetch Ship Mode CSV -->
+    <processor>
+        <id>GetDimShipMode</id>
+        <type>org.apache.nifi.processors.standard.GetFile</type>
+        <name>GetDimShipMode</name>
+        <properties>
+            <property>
+                <name>Input Directory</name>
+                <value>D:/DW/cw</value>
+            </property>
+            <property>
+                <name>File Filter</name>
+                <value>DimShipMode\.csv</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- ==================== TRANSFORM PHASE ==================== -->
+    
+    <!-- SplitCustomerData - Split customer CSV into records -->
+    <processor>
+        <id>SplitCustomerData</id>
+        <type>org.apache.nifi.processors.standard.SplitText</type>
+        <name>SplitCustomerData</name>
+        <properties>
+            <property>
+                <name>Line Split Count</name>
+                <value>1000</value>
+            </property>
+            <property>
+                <name>Header Line Count</name>
+                <value>1</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- SplitProductData - Split product CSV into records -->
+    <processor>
+        <id></id>
+        SplitProductData<type>org.apache.nifi.processors.standard.SplitText</type>
+        <name>SplitProductData</name>
+        <properties>
+            <property>
+                <name>Line Split Count</name>
+                <value>1000</value>
+            </property>
+            <property>
+                <name>Header Line Count</name>
+                <value>1</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- SplitSalesData - Split sales CSV into records -->
+    <processor>
+        <id>SplitSalesData</id>
+        <type>org.apache.nifi.processors.standard.SplitText</type>
+        <name>SplitSalesData</name>
+        <properties>
+            <property>
+                <name>Line Split Count</name>
+                <value>1000</value>
+            </property>
+            <property>
+                <name>Header Line Count</name>
+                <value>1</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- ConvertCustomerJson - Convert CSV to JSON for transformation -->
+    <processor>
+        <id>ConvertCustomerJson</id>
+        <type>org.apache.nifi.processors.standard.ConvertRecord</type>
+        <name>ConvertCustomerToJson</name>
+        <properties>
+            <property>
+                <name>Record Reader</name>
+                <value>CustomerCSVReader</value>
+            </property>
+            <property>
+                <name>Record Writer</name>
+                <value>JsonRecordWriter</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- ConvertProductJson - Convert product CSV to JSON -->
+    <processor>
+        <id>ConvertProductJson</id>
+        <type>org.apache.nifi.processors.standard.ConvertRecord</type>
+        <name>ConvertProductToJson</name>
+        <properties>
+            <property>
+                <name>Record Reader</name>
+                <value>ProductCSVReader</value>
+            </property>
+            <property>
+                <name>Record Writer</name>
+                <value>JsonRecordWriter</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- ConvertSalesJson - Convert sales CSV to JSON -->
+    <processor>
+        <id>ConvertSalesJson</id>
+        <type>org.apache.nifi.processors.standard.ConvertRecord</type>
+        <name>ConvertSalesToJson</name>
+        <properties>
+            <property>
+                <name>Record Reader</name>
+                <value>SalesCSVReader</value>
+            </property>
+            <property>
+                <name>Record Writer</name>
+                <value>JsonRecordWriter</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- TransformCustomerData - Apply business rules to customer data -->
+    <processor>
+        <id>TransformCustomerData</id>
+        <type>org.apache.nifi.processors.standard.ExecuteScript</type>
+        <name>TransformCustomerData</name>
+        <properties>
+            <property>
+                <name>Script Engine</name>
+                <value>Python</value>
+            </property>
+            <property>
+                <name>Script Body">
+def transformCustomerRecord(record):
+    # Data cleansing and transformation
+    if record.get('PostalCode'):
+        record['PostalCode'] = str(record['PostalCode']).zfill(5)
+    if record.get('Region'):
+        record['Region'] = record['Region'].strip().title()
+    return record
+                </value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- TransformProductData - Apply business rules to product data -->
+    <processor>
+        <id>TransformProductData</id>
+        <type>org.apache.nifi.processors.standard.ExecuteScript</type>
+        <name>TransformProductData</name>
+        <properties>
+            <property>
+                <name>Script Engine</name>
+                <value>Python</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- TransformSalesData - Apply business rules to sales data -->
+    <processor>
+        <id>TransformSalesData</id>
+        <type>org.apache.nifi.processors.standard.ExecuteScript</type>
+        <name>TransformSalesData</name>
+        <properties>
+            <property>
+                <name>Script Engine</name>
+                <value>Python</value>
+            </property>
+            <property>
+                <name>Script Body">
+def transformSalesRecord(record):
+    # Calculate derived fields
+    if record.get('Sales') and record.get('Quantity'):
+        record['AvgPrice'] = record['Sales'] / record['Quantity']
+    if record.get('Sales') and record.get('Discount'):
+        record['DiscountAmount'] = record['Sales'] * record['Discount']
+    return record
+                </value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- MergeAllData - Merge all transformed data -->
+    <processor>
+        <id>MergeAllData</id>
+        <type>org.apache.nifi.processors.standard.MergeContent</type>
+        <name>MergeAllData</name>
+        <properties>
+            <property>
+                <name>Merge Strategy</name>
+                <value>Bin Packing Algorithm</value>
+            </property>
+            <property>
+                <name>Minimum Number of Records</name>
+                <value>1000</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- ==================== LOAD PHASE ==================== -->
+    
+    <!-- PutToDataWarehouse - Load data to SQLite -->
+    <processor>
+        <id>PutToDataWarehouse</id>
+        <type>org.apache.nifi.processors.standard.ExecuteSQL</type>
+        <name>PutToDataWarehouse</name>
+        <properties>
+            <property>
+                <name>Database Connection Pooling Service</name>
+                <value>DBCPConnectionPool</value>
+            </property>
+            <property>
+                <name>SQL Statement</name>
+                <value>INSERT INTO SalesFact (RowID, OrderID, OrderDate, ShipDate, ShipMode, CustomerID, ProductID, Sales, Quantity, Discount, Profit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- PutCustomerToWarehouse - Load customer dimension -->
+    <processor>
+        <id>PutCustomerToWarehouse</id>
+        <type>org.apache.nifi.processors.standard.ExecuteSQL</type>
+        <name>PutCustomerToWarehouse</name>
+        <properties>
+            <property>
+                <name>Database Connection Pooling Service</name>
+                <value>DBCPConnectionPool</value>
+            </property>
+            <property>
+                <name>SQL Statement</name>
+                <value>INSERT OR REPLACE INTO Customers (CustomerID, CustomerName, Segment, Country, City, State, PostalCode, Region) VALUES (?, ?, ?, ?, ?, ?, ?, ?)</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- PutProductToWarehouse - Load product dimension -->
+    <processor>
+        <id>PutProductToWarehouse</id>
+        <type>org.apache.nifi.processors.standard.ExecuteSQL</type>
+        <name>PutProductToWarehouse</name>
+        <properties>
+            <property>
+                <name>Database Connection Pooling Service</name>
+                <value>DBCPConnectionPool</value>
+            </property>
+            <property>
+                <name>SQL Statement</name>
+                <value>INSERT OR REPLACE INTO Products (ProductID, Category, SubCategory, ProductName) VALUES (?, ?, ?, ?)</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- PutDateToWarehouse - Load date dimension -->
+    <processor>
+        <id>PutDateToWarehouse</id>
+        <type>org.apache.nifi.processors.standard.ExecuteSQL</type>
+        <name>PutDateToWarehouse</name>
+        <properties>
+            <property>
+                <name>Database Connection Pooling Service</name>
+                <value>DBCPConnectionPool</value>
+            </property>
+            <property>
+                <name>SQL Statement</name>
+                <value>INSERT OR REPLACE INTO DimDate (DateKey, CalendarDate, Year, Quarter, Month, Day, Weekday, FiscalYear, FiscalQuarter) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- PutStoreToWarehouse - Load store dimension -->
+    <processor>
+        <id>PutStoreToWarehouse</id>
+        <type>org.apache.nifi.processors.standard.ExecuteSQL</type>
+        <name>PutStoreToWarehouse</name>
+        <properties>
+            <property>
+                <name>Database Connection Pooling Service</name>
+                <value>DBCPConnectionPool</value>
+            </property>
+            <property>
+                <name>SQL Statement</name>
+                <value>INSERT OR REPLACE INTO DimStore (StoreID, StoreName, Region, City, State) VALUES (?, ?, ?, ?, ?)</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- PutShipModeToWarehouse - Load ship mode dimension -->
+    <processor>
+        <id>PutShipModeToWarehouse</id>
+        <type>org.apache.nifi.processors.standard.ExecuteSQL</type>
+        <name>PutShipModeToWarehouse</name>
+        <properties>
+            <property>
+                <name>Database Connection Pooling Service</name>
+                <value>DBCPConnectionPool</value>
+            </property>
+            <property>
+                <name>SQL Statement</name>
+                <value>INSERT OR REPLACE INTO DimShipMode (ShipMode) VALUES (?)</value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- ==================== ERROR HANDLING ==================== -->
+    
+    <!-- LogFailedRecords - Log failed records for debugging -->
+    <processor>
+        <id>LogFailedRecords</id>
+        <type>org.apache.nifi.processors.standard.LogAttribute</type>
+        <name>LogFailedRecords</name>
+        <properties>
+            <property>
+                <name>Log Level</name>
+                <value>ERROR</value>
+            </property>
+            <property>
+                <name>Log Prefix</name>
+                <value>ETL Failed: </value>
+            </property>
+        </properties>
+    </processor>
+    
+    <!-- ==================== CONNECTIONS ==================== -->
+    
+    <!-- Customer Data Flow -->
+    <connection>
+        <id>conn-customer-1</id>
+        <sourceId>GetCustomerData</sourceId>
+        <targetId>SplitCustomerData</targetId>
+    </connection>
+    
+    <connection>
+        <id>conn-customer-2</id>
+        <sourceId>SplitCustomerData</sourceId>
+        <targetId>ConvertCustomerJson</targetId>
+    </connection>
+    
+    <connection>
+        <id>conn-customer-3</id>
+        <sourceId>ConvertCustomerJson</sourceId>
+        <targetId>TransformCustomerData</targetId>
+    </connection>
+    
+    <connection>
+        <id>conn-customer-4</id>
+        <sourceId>TransformCustomerData</sourceId>
+        <targetId>PutCustomerToWarehouse</targetId>
+    </connection>
+    
+    <!-- Product Data Flow -->
+    <connection>
+        <id>conn-product-1</id>
+        <sourceId>GetProductData</sourceId>
+        <targetId>SplitProductData</targetId>
+    </connection>
+    
+    <connection>
+        <id>conn-product-2</id>
+        <sourceId>SplitProductData</sourceId>
+        <targetId>ConvertProductJson</targetId>
+    </connection>
+    
+    <connection>
+        <id>conn-product-3</id>
+        <sourceId>ConvertProductJson</sourceId>
+        <targetId>TransformProductData</targetId>
+    </connection>
+    
+    <connection>
+        <id>conn-product-4</id>
+        <sourceId>TransformProductData</sourceId>
+        <targetId>PutProductToWarehouse</targetId>
+    </connection>
+    
+    <!-- Sales Data Flow -->
+    <connection>
+        <id>conn-sales-1</id>
+        <sourceId>GetSalesData</sourceId>
+        <targetId>SplitSalesData</targetId>
+    </connection>
+    
+    <connection>
+        <id>conn-sales-2</id>
+        <sourceId>SplitSalesData</sourceId>
+        <targetId>ConvertSalesJson</targetId>
+    </connection>
+    
+    <connection>
+        <id>conn-sales-3</id>
+        <sourceId>ConvertSalesJson</sourceId>
+        <targetId>TransformSalesData</targetId>
+    </connection>
+    
+    <connection>
+        <id>conn-sales-4</id>
+        <sourceId>TransformSalesData</sourceId>
+        <targetId>PutToDataWarehouse</targetId>
+    </connection>
+    
+    <!-- Dimension Data Flows -->
+    <connection>
+        <id>conn-dimdate</id>
+        <sourceId>GetDimDate</sourceId>
+        <targetId>PutDateToWarehouse</targetId>
+    </connection>
+    
+    <connection>
+        <id>conn-dimstore</id>
+        <sourceId>GetDimStore</sourceId>
+        <targetId>PutStoreToWarehouse</targetId>
+    </connection>
+    
+    <connection>
+        <id>conn-dimshipmode</id>
+        <sourceId>GetDimShipMode</sourceId>
+        <targetId>PutShipModeToWarehouse</targetId>
+    </connection>
+    
+    <!-- Error Connections -->
+    <connection>
+        <id>conn-error-1</id>
+        <sourceId>TransformCustomerData</sourceId>
+        <targetId>LogFailedRecords</targetId>
+        <relationship>failure</relationship>
+    </connection>
+    
+    <connection>
+        <id>conn-error-2</id>
+        <sourceId>TransformProductData</sourceId>
+        <targetId>LogFailedRecords</targetId>
+        <relationship>failure</relationship>
+    </connection>
+    
+    <connection>
+        <id>conn-error-3</id>
+        <sourceId>TransformSalesData</sourceId>
+        <targetId>LogFailedRecords</targetId>
+        <relationship>failure</relationship>
+    </connection>
+    
+    <!-- ==================== CONTROLLER SERVICES ==================== -->
+    
+    <!-- Database Connection Pool -->
+    <controllerService>
+        <id>DBCPConnectionPool</id>
+        <type>org.apache.nifi.dbcp.DBCPConnectionPool</type>
+        <name>DBCPConnectionPool</name>
+        <properties>
+            <property>
+                <name>Database Connection URL</name>
+                <value>jdbc:sqlite:D:/DW/cw/superstore.db</value>
+            </property>
+            <property>
+                <name>Database Driver Class Name</name>
+                <value>org.sqlite.JDBC</value>
+            </property>
+            <property>
+                <name>Max Wait Time</name>
+                <value>500 millis</value>
+            </property>
+            <property>
+                <name>Max Total Connections</name>
+                <value>8</value>
+            </property>
+        </properties>
+    </controllerService>
+    
+    <!-- CSV Record Reader for Customers -->
+    <controllerService>
+        <id>CustomerCSVReader</id>
+        <type>org.apache.nifi.csv.CSVReader</type>
+        <name>CustomerCSVReader</name>
+        <properties>
+            <property>
+                <name>Schema Access Strategy</name>
+                <value>Schema Text Property</value>
+            </property>
+            <property>
+                <name>Schema Text</name>
+                <value>{"type":"record","name":"customer","fields":[{"name":"CustomerID","type":"string"},{"name":"CustomerName","type":"string"},{"name":"Segment","type":"string"},{"name":"Country","type":"string"},{"name":"City","type":"string"},{"name":"State","type":"string"},{"name":"PostalCode","type":"string"},{"name":"Region","type":"string"}]}</value>
+            </property>
+            <property>
+                <name>CSV Header</name>
+                <value>Use Header Line</value>
+            </property>
+            <property>
+                <name>Delimiter</name>
+                <value>,</value>
+            </property>
+        </properties>
+        <propertyVisibility> org.apache.nifi.controller.ControllerService </propertyVisibility>
+    </controllerService>
+    
+    <!-- CSV Record Reader for Products -->
+    <controllerService>
+        <id>ProductCSVReader</id>
+        <type>org.apache.nifi.csv.CSVReader</type>
+        <name>ProductCSVReader</name>
+        <properties>
+            <property>
+                <name>Schema Access Strategy</name>
+                <value>Schema Text Property</value>
+            </property>
+            <property>
+                <name>Schema Text</name>
+                <value>{"type":"record","name":"product","fields":[{"name":"ProductID","type":"string"},{"name":"Category","type":"string"},{"name":"SubCategory","type":"string"},{"name":"ProductName","type":"string"}]}</value>
+            </property>
+            <property>
+                <name>CSV Header</name>
+                <value>Use Header Line</value>
+            </property>
+            <property>
+                <name>Delimiter</name>
+                <value>,</value>
+            </property>
+        </properties>
+        <propertyVisibility> org.apache.nifi.controller.ControllerService </propertyVisibility>
+    </controllerService>
+    
+    <!-- CSV Record Reader for Sales -->
+    <controllerService>
+        <id>SalesCSVReader</id>
+        <type>org.apache.nifi.csv.CSVReader</type>
+        <name>SalesCSVReader</name>
+        <properties>
+            <property>
+                <name>Schema Access Strategy</name>
+                <value>Schema Text Property</value>
+            </property>
+            <property>
+                <name>Schema Text</name>
+                <value>{"type":"record","name":"sales","fields":[{"name":"RowID","type":"int"},{"name":"OrderID","type":"string"},{"name":"OrderDate","type":"string"},{"name":"ShipDate","type":"string"},{"name":"ShipMode","type":"string"},{"name":"CustomerID","type":"string"},{"name":"ProductID","type":"string"},{"name":"Sales","type":"double"},{"name":"Quantity","type":"int"},{"name":"Discount","type":"double"},{"name":"Profit","type":"double"}]}</value>
+            </property>
+            <property>
+                <name>CSV Header</name>
+                <value>Use Header Line</value>
+            </property>
+            <property>
+                <name>Delimiter</name>
+                <value>,</value>
+            </property>
+        </properties>
+        <propertyVisibility> org.apache.nifi.controller.ControllerService </propertyVisibility>
+    </controllerService>
+    
+    <!-- JSON Record Writer -->
+    <controllerService>
+        <id>JsonRecordWriter</id>
+        <type>org.apache.nifi.json.JsonRecordSetWriter</type>
+        <name>JsonRecordWriter</name>
+        <properties>
+            <property>
+                <name>Schema Access Strategy</name>
+                <value>Use 'Schema Text' Property</value>
+            </property>
+        </properties>
+        <propertyVisibility> org.apache.nifi.controller.ControllerService </propertyVisibility>
+    </controllerService>
+    
+</template>
