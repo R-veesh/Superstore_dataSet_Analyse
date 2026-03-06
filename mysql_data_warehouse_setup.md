@@ -477,3 +477,14 @@ SELECT 'fact_orders', COUNT(*) FROM fact_orders;
 | Error 1062 | Duplicate primary key | Remove PRIMARY KEY from staging, use INSERT IGNORE |
 | Error 1406 | Data too long | Use LONGTEXT instead of VARCHAR |
 | Error 1062 (duplicate) | Table has data | TRUNCATE table before loading |
+
+## i have to do list 
+What's Next?
+Here are your options:
+Option	Description
+1. Power BI Visualizations	Create actual dashboards with the 10 visualizations from the report
+2. Run SQL Queries	Get specific insights (top customers, profit by category, regional analysis)
+3. Export to CSV	Export dimension/fact tables for use in Excel, Tableau, or other tools
+4. Tableau Dashboard	Connect MySQL to Tableau for visualizations
+5. Automate ETL	Create a script to refresh data periodically
+---

@@ -1,0 +1,5 @@
+store_key,store_id,store_name,region,city,state
+1,1,South Store,South,,
+2,2,West Store,West,,
+3,3,Central Store,Central,,
+4,4,East Store,East
